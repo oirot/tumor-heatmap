@@ -12,24 +12,19 @@ readAlexandrovV32Signatures <- function(filenames){
 }
 
 readAlexandrovV2Signatures <- function(filename){
-  
   signatures <- readAlexandrovSignatures(filename)
   return(signatures)
 }
 
-readShiraishiSignatures <- function(filenames){
-  signatures <- readShiraishiSignatures(files = filenames) 
-  return(signatures)  
-}
 
 #list of allowed signature types
-signatureTypes <- list(alex2 = "AlexV2", alex3 = "AlexV3.2", shi = "shi")
+signatureTypes <- list(alex2 = "AlexV2", alex3 = "AlexV32", shi = "shi")
 #vector of functions to read the allowd signature types
 readSignaturesFunctions <- c(readAlexandrovV2Signatures,
                              readAlexandrovV32Signatures,
                              readShiraishiSignatures)
 
-read.signature <- function(signaturePath, signatureType){
+readSignatures <- function(signaturePath, signatureType){
   type <- match(signatureType, signatureTypes) 
   signatures <- readSignaturesFunctions[[type]](signaturePath)
   return(signatures)
