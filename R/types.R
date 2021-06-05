@@ -1,0 +1,30 @@
+#list of allowed signature types
+signatureTypes <- list(alexandrov2 = "Alexandrov.2", alexandrov32 = "Alexandrov.32",
+                       shiraishi = "Shiraishi")
+
+getGenomeType <- function(signatureType){
+  return(split(signatureType, ".")[[1]])
+}
+
+#TODO: add check for the format
+readAlexandrovV32Signatures <- function(filenames){
+  signatures <- as.matrix(read.table(filenames, sep="\t", header = TRUE,
+                                     row.names = 1))
+  mutationIDs <- rownames(signatures)
+  signatures <- split(signatures, col(signatures, as.factor = TRUE))
+  signatures <- lapply(signatures, function(l){
+    names(l) <- mutationIDs
+    return(l)
+  })
+  return(signatures)
+}
+
+#vector of functions to read the allowd signature types
+readSignaturesFunctions <- c(readAlexandrovSignatures,
+                             readAlexandrovV32Signatures,
+                             readShiraishiSignatures)
+#returns the correct function to read the signatures from the type
+getReadSignatureFunction <- function(type){
+  type <- match(type, signatureTypes) 
+  return(readSignaturesFunctions[[type]])
+}
