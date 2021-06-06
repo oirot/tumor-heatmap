@@ -1,4 +1,7 @@
 #list of allowed signature types
+#' A list of the available signatures
+#' 
+#' @export
 signatureTypes <- list(alexandrov2 = "Alexandrov.2", alexandrov32 = "Alexandrov.32",
                        shiraishi = "Shiraishi")
 
@@ -19,10 +22,14 @@ readAlexandrovV32Signatures <- function(filenames){
   return(signatures)
 }
 
+#'@importFrom decompTumor2Sig readAlexandrovSignatures
+#'@importFrom decompTumor2Sig readShiraishiSignatures
+#'@internal
 #vector of functions to read the allowd signature types
 readSignaturesFunctions <- c(readAlexandrovSignatures,
                              readAlexandrovV32Signatures,
                              readShiraishiSignatures)
+
 #returns the correct function to read the signatures from the type
 getReadSignatureFunction <- function(type){
   type <- match(type, signatureTypes) 
