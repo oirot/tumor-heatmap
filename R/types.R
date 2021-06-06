@@ -26,9 +26,9 @@ readAlexandrovV32Signatures <- function(filenames){
 #'@importFrom decompTumor2Sig readShiraishiSignatures
 #'@internal
 #vector of functions to read the allowd signature types
-readSignaturesFunctions <- c(readAlexandrovSignatures,
+readSignaturesFunctions <- c(decompTumor2Sig::readAlexandrovSignatures,
                              readAlexandrovV32Signatures,
-                             readShiraishiSignatures)
+                             decompTumor2Sig::readShiraishiSignatures)
 
 #returns the correct function to read the signatures from the type
 getReadSignatureFunction <- function(type){
