@@ -1,5 +1,4 @@
 Package: tumorHeatmap
-Type: Package
 Title: Visual comparison of mutational processes in a set of tumors
 Version: 1.0
 Date: 2021-06-04
@@ -7,9 +6,9 @@ Author: Vittorio Aiello
 Maintainer: Vittorio Aiello <vittorio.aiello@mail.polimi.it>
 Description: Compute the exposure vectors of tumoral genomes and producing a heatmap to visualize the results
 License: CC0
-NeedsCompilation: no
-Packaged: 2021-06-04 20:10:44 UTC; vitto
-Built: R 4.0.5; ; 2021-06-04 20:10:53 UTC; unix
 RoxygenNote: 7.1.1
 Imports: 
-    decompTumor2Sig
+    decompTumor2Sig,
+    methods,
+    stats,
+    utils

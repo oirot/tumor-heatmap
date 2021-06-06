@@ -55,6 +55,10 @@
 #' @importFrom decompTumor2Sig isSignatureSet
 #' @importFrom decompTumor2Sig readGenomesFromMPF
 #' @importFrom decompTumor2Sig decomposeTumorGenomes
+#' @importFrom decompTumor2Sig sameSignatureFormat
+#' @importFrom stats heatmap
+#' @importFrom utils read.table
+#' @importFrom methods is
 #' @export
 
 

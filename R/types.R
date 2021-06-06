@@ -10,6 +10,7 @@ getGenomeType <- function(signatureType){
 }
 
 #TODO: add check for the format
+#' @importFrom utils read.table
 readAlexandrovV32Signatures <- function(filenames){
   signatures <- as.matrix(read.table(filenames, sep="\t", header = TRUE,
                                      row.names = 1))
@@ -24,7 +25,6 @@ readAlexandrovV32Signatures <- function(filenames){
 
 #'@importFrom decompTumor2Sig readAlexandrovSignatures
 #'@importFrom decompTumor2Sig readShiraishiSignatures
-#'@internal
 #vector of functions to read the allowd signature types
 readSignaturesFunctions <- c(decompTumor2Sig::readAlexandrovSignatures,
                              readAlexandrovV32Signatures,
