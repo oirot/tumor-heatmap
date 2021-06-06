@@ -6,7 +6,7 @@ signatureTypes <- list(alexandrov2 = "Alexandrov.2", alexandrov32 = "Alexandrov.
                        shiraishi = "Shiraishi")
 
 getGenomeType <- function(signatureType){
-  return(split(signatureType, ".")[[1]])
+  return(strsplit(signatureType, ".", fixed = TRUE)[[1]][1])
 }
 
 #TODO: add check for the format
