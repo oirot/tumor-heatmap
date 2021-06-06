@@ -86,7 +86,11 @@ tumorHeatmap <- function(mpfFilePath,
                                 transcriptAnno = transcriptAnno,
                                 verbose = verbose)
   if(verbose) print("DONE")
-  
+  if(!sameSignatureFormat(signatures, genomes)){
+    stop(paste0("The parameter used to load the genomes need to be the same",
+    " as the ones used to generate the signatures. Please verify that this is ",
+    "the case"))
+  }
   if(verbose) print("Estimating exposure vecotrs...")
   exposure <- decomposeTumorGenomes(genomes = genomes, signatures = signatures)
   if(verbose) print("DONE")
