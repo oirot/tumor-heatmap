@@ -11,7 +11,7 @@
 #' vectors, data frames or matrices. Vectors are used for Alexandrov signatures, 
 #' data frames or matrices for Shiraishi signatures.
 #'
-#' @param signaturesTypes (Optional) A string representing the signature type
+#' @param signaturesType (Optional) A string representing the signature type
 #' a list of signature types is available as the object `signatureTypes` 
 #' @seealso [signatureTypes]. Use alexandrov2 for Alexandrov V2 signatures, 
 #' alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
