@@ -79,19 +79,22 @@ tumorHeatmap <- function(mpfFilePath,
   
   
   if(verbose) print("Loading genomes... ")
-  #read the tumoral genomes
+  #read the tumor genomes
   genomes <- readGenomesFromMPF(mpfFilePath, numBases = numBases, 
-                                type = getGenomeType(type), trDir = trDir,
+                                type = getGenomeType(signaturesType), trDir = trDir,
                                 refGenome = refGenome, 
-                                transcriptAnno = transcriptAnno, verbose = FALSE)
+                                transcriptAnno = transcriptAnno,
+                                verbose = verbose)
   if(verbose) print("DONE")
   
   if(verbose) print("Estimating exposure vecotrs...")
   exposure <- decomposeTumorGenomes(genomes = genomes, signatures = signatures)
   if(verbose) print("DONE")
   
-  exp <- do.call(cbind, exposure)
-  heatmap(t(exp), Colv = NA, scale = "row", revC = TRUE, 
+  exposures <- t(do.call(cbind, exposure))
+  heatmap(exposures, Colv = NA, scale = "row", revC = TRUE, 
           main = "Heatmap of the exposure vectors", 
           xlab = "Signature", ylab = "Sample")
+  
+  return(exposures)
 }
