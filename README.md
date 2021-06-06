@@ -1,4 +1,4 @@
-tumor-heatmap
+tumorHeatmap
 
 R project for the scientific programming exam.
 
