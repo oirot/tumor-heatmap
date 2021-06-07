@@ -1,6 +1,21 @@
-#' Computes the exposure vectors from an MPF file and plots 
-#' an heatmap clustering the different tumor genomes by their 
-#' similarities in the calculated exposure different tumarl genomes by their 
+#' Heatmap of exposure vectors from tumor genomes
+#' 
+#' `tumorHeatmap` function computes the exposure vectors from an MPF file and 
+#' plots an heatmap, clustering the different tumor genomes by their 
+#' similarities in the exposure vectors.
+#'
+#'
+#' @usage tumorHeatmap(mpfFilePath, 
+#' signatures,
+#' signaturesType = signatureTypes$alexandrov32,
+#' numBases = 5,
+#' trDir = TRUE, 
+#' enforceUniqueTrDir = TRUE,
+#' refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19, 
+#' transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
+#' verbose = FALSE)
+#' 
+#'
 #'
 #' @param mpfFilePath (Mandatory) The path of the MPF file from which to load the tumor
 #' genomes
@@ -11,11 +26,15 @@
 #' vectors, data frames or matrices. Vectors are used for Alexandrov signatures, 
 #' data frames or matrices for Shiraishi signatures.
 #'
-#' @param signaturesType (Optional) A string representing the signature type
-#' a list of signature types is available as the object `signatureTypes` 
-#' @seealso [signatureTypes]. Use alexandrov2 for Alexandrov V2 signatures, 
+#' @param signaturesType (Optional) A string representing the signature type.
+#' A list of the allowd signature types is available as the object `signatureTypes`. 
+#' Use alexandrov2 for Alexandrov V2 signatures, 
 #' alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
-#'
+#' DEFAULT: signatureTypes$alexandrov32
+#' 
+#' @param numBases (Optional) Total number of bases (mutated base and flanking
+#'  bases) to be used for sequence patterns. Must be odd. Default: 5
+#'  
 #' @param refGenome (Mandatory) Total number of bases (mutated base and flanking
 #' bases) to be used for sequence patterns. Must be odd. Default: 5
 #'
@@ -43,14 +62,34 @@
 #' 
 #' @details
 #' Many of the parameters of this function are also described in the function
-#' `readGenomesFromMPF{decompTumor2Sig}` @seealso [readGenomesFromMPF()] 
-#'  @seealso [decomposeTumorGenomes()] as that function and package are at the
+#' `readGenomesFromMPF()` and `decomposeTumorGenomes()` from the package
+#' `decompTumor2Sig` as those functions and package are at the
 #' base of this function and many parameteres are passed directly to those
-#' functions. A more detailed explanation of the parameters and the function can 
-#' be found there.
+#' functions. A more throughout explanation of the parameters and the functions 
+#' can be found in their documentation, liked in the see also section. 
+#' @seealso [decompTumor2Sig] 
+#' The links to the documentation of the mentioned functions from the package
+#' `decompTumor2Sig`
+#' \link[decompTumor2Sig]{readGenomesFromMPF}
+#' \link[decompTumor2Sig]{decomposeTumorGenomes}
 #' 
 #' @return The exposure vector is returned and a heatmap of their similarity is
 #' plotted
+#'
+#' @example 
+#' ### read breast cancer genomes from Nik-Zainal et al (PMID: 22608084) 
+#' gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz", 
+#'                     package="decompTumor2Sig")
+#'                     
+#' ### read the Shiraishi signatures 
+#' sigfiles <- sigfiles <- system.file("extdata",
+#' paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",1:4,".tsv"),
+#' package="decompTumor2Sig")
+#' 
+#' ### compute the exposure vectors and plot the heatmap
+#' exposures <- tumorHeatmap(gfile, signatures, 
+#' signaturesType = signatureTypes$shiraishi)
+#' 
 #' 
 #' @importFrom decompTumor2Sig isSignatureSet
 #' @importFrom decompTumor2Sig readGenomesFromMPF

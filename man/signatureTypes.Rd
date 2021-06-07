@@ -3,7 +3,7 @@
 \docType{data}
 \name{signatureTypes}
 \alias{signatureTypes}
-\title{A list of the available signatures}
+\title{A list of the allowed signatures type}
 \format{
 An object of class \code{list} of length 3.
 }
@@ -11,6 +11,8 @@ An object of class \code{list} of length 3.
 signatureTypes
 }
 \description{
-A list of the available signatures
+This list contains all the allowed signature types.
+Use alexandrov2 for Alexandrov V2 signatures, 
+alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 }
 \keyword{datasets}
