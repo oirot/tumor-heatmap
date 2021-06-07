@@ -12,5 +12,5 @@ Imports:
     methods,
     stats,
     utils
-Suggested:
-    tastthat
+Suggests:
+    testthat
