@@ -12,6 +12,8 @@ test_that("Heatmap with Shiarishi signatures", {
   # compute the exposure vectors and plot the heatmap
   exposures <- tumorHeatmap(gfile, sigfiles, 
                             signaturesType = signatureTypes$shiraishi)
+  #switch off the graphical device
+  dev.off()
   expect_is(exposures, "matrix")
 })
 
@@ -26,6 +28,8 @@ test_that("Heatmap with Alexandrov V3.2 signatures", {
                             signaturesType = signatureTypes$alexandrov32,
                             numBases = 3,
                             trDir = FALSE)
+  #switch off the graphical device
+  dev.off()
   expect_is(exposures, "matrix")
 })
 
