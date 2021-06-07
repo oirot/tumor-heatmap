@@ -10,23 +10,25 @@ signaturesType = signatureTypes$alexandrov32,
 numBases = 5,
 trDir = TRUE, 
 enforceUniqueTrDir = TRUE,
-refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19, 
-transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
+refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
+transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
+TxDb.Hsapiens.UCSC.hg19.knownGene,
 verbose = FALSE)
 }
 \arguments{
-\item{mpfFilePath}{(Mandatory) The path of the MPF file from which to load the tumor
-genomes}
+\item{mpfFilePath}{(Mandatory) The path of the MPF file from
+which to load the tumor genomes}
 
-\item{signatures}{(Mandatory) Either a path to the signature file or a vector of 
-path to signatures file (in the case of Shiraishi signatures). Also, it can be
-dircetly an object containing the signatures. The object can be A list of 
-vectors, data frames or matrices. Vectors are used for Alexandrov signatures, 
-data frames or matrices for Shiraishi signatures.}
+\item{signatures}{(Mandatory) Either a path to the signature 
+file or a vector
+can be dircetly an object containing the signatures. The object can be a 
+list of vectors, data frames or matrices. Vectors are 
+used for Alexandrov 
+signatures, data frames or matrices for Shiraishi signatures.}
 
 \item{signaturesType}{(Optional) A string representing the signature type.
-A list of the allowd signature types is available as the object `signatureTypes`. 
-Use alexandrov2 for Alexandrov V2 signatures, 
+A list of the allowd signature types is available as the object
+ `signatureTypes`. Use alexandrov2 for Alexandrov V2 signatures, 
 alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 DEFAULT: signatureTypes$alexandrov32}
 
@@ -45,7 +47,7 @@ be excluded from the analysis. If FALSE, the transcript direction
 encountered first in the transcript database (see transcriptAnno) is
 assigned to the mutation.}
 
-\item{refGenome}{refGenome    (Mandatory) The reference genome (BSgenome)
+\item{refGenome}{(Mandatory) The reference genome (BSgenome)
 needed to extract sequence patterns. Default: BSgenome object for hg19.}
 
 \item{transcriptAnno}{(Optional) Transcript annotation (TxDb object) used to

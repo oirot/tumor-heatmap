@@ -12,7 +12,7 @@ signatureTypes
 }
 \description{
 This list contains all the allowed signature types.
-Use alexandrov2 for Alexandrov V2 signatures, 
+Use alexandrov2 for Alexandrov V2 signatures,
 alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 }
 \keyword{datasets}
