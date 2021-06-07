@@ -3,7 +3,7 @@ test_that("Heatmap with Shiarishi signatures", {
   gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz", 
                        package="decompTumor2Sig")
                        
-  ### read the Shiraishi signatures 
+  # get the filenames with the shiraishi signatures 
   sigfiles <- system.file("extdata",
                           paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
                                  1:4,".tsv"),
