@@ -11,24 +11,25 @@
 #' numBases = 5,
 #' trDir = TRUE, 
 #' enforceUniqueTrDir = TRUE,
-#' refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19, 
-#' transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
+#' refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
+#' transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.
+#' knownGene,
 #' verbose = FALSE)
-#' 
 #'
 #'
-#' @param mpfFilePath (Mandatory) The path of the MPF file from which to load the tumor
-#' genomes
-#'  
-#' @param signatures (Mandatory) Either a path to the signature file or a vector of 
-#' path to signatures file (in the case of Shiraishi signatures). Also, it can be
-#' dircetly an object containing the signatures. The object can be A list of 
-#' vectors, data frames or matrices. Vectors are used for Alexandrov signatures, 
-#' data frames or matrices for Shiraishi signatures.
+#'
+#' @param mpfFilePath (Mandatory) The path of the MPF file from which to load
+#' the tumor genomes
+#'
+#' @param signatures (Mandatory) Either a path to the signature file or a vector
+#'  of path to signatures file (in the case of Shiraishi signatures). Also, it 
+#'  can be dircetly an object containing the signatures. The object can be a 
+#'  list of vectors, data frames or matrices. Vectors are used for Alexandrov 
+#'  signatures, data frames or matrices for Shiraishi signatures.
 #'
 #' @param signaturesType (Optional) A string representing the signature type.
-#' A list of the allowd signature types is available as the object `signatureTypes`. 
-#' Use alexandrov2 for Alexandrov V2 signatures, 
+#' A list of the allowd signature types is available as the object
+#'  `signatureTypes`. Use alexandrov2 for Alexandrov V2 signatures, 
 #' alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 #' DEFAULT: signatureTypes$alexandrov32
 #' 
@@ -50,7 +51,7 @@
 #' encountered first in the transcript database (see transcriptAnno) is
 #' assigned to the mutation. 
 #' 
-#' @param refGenome refGenome	(Mandatory) The reference genome (BSgenome)
+#' @param refGenome (Mandatory) The reference genome (BSgenome)
 #' needed to extract sequence patterns. Default: BSgenome object for hg19.
 #' 
 #' @param transcriptAnno (Optional) Transcript annotation (TxDb object) used to
@@ -107,13 +108,17 @@ tumorHeatmap <- function(mpfFilePath,
                          numBases = 5,
                          trDir = TRUE, 
                          enforceUniqueTrDir = TRUE,
-                         refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19, 
-                         transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
+                         refGenome = BSgenome.Hsapiens.UCSC.hg19::
+                           BSgenome.Hsapiens.UCSC.hg19, 
+                         transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
+                           TxDb.Hsapiens.UCSC.hg19.knownGene,
                          verbose = FALSE){
   
   if(is(signatures, "character")){
-    #if the signatures are a string treat them as a path to the actual signatures
-    signatures <- readSignatures(signaturePath = signatures, type = signaturesType)
+    #if the signatures are a string treat them as a path to 
+    #the actual signatures
+    signatures <- readSignatures(signaturePath = signatures, 
+                                 type = signaturesType)
   }
   #otherwise assume that the signature are in the object itself
   if(!isSignatureSet(signatures)){
@@ -123,8 +128,10 @@ tumorHeatmap <- function(mpfFilePath,
   
   if(verbose) print("Loading genomes... ")
   #read the tumor genomes
-  genomes <- decompTumor2Sig::readGenomesFromMPF(mpfFilePath, numBases = numBases, 
-                                type = getGenomeType(signaturesType), trDir = trDir,
+  genomes <- readGenomesFromMPF(mpfFilePath,
+                                numBases = numBases, 
+                                type = getGenomeType(signaturesType),
+                                trDir = trDir,
                                 refGenome = refGenome, 
                                 transcriptAnno = transcriptAnno,
                                 verbose = verbose)
@@ -135,7 +142,7 @@ tumorHeatmap <- function(mpfFilePath,
     "the case"))
   }
   if(verbose) print("Estimating exposure vecotrs...")
-  exposure <- decompTumor2Sig::decomposeTumorGenomes(genomes = genomes, signatures = signatures)
+  exposure <- decomposeTumorGenomes(genomes = genomes, signatures = signatures)
   if(verbose) print("DONE")
   
   exposures <- t(do.call(cbind, exposure))

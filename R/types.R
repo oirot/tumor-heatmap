@@ -5,7 +5,8 @@
 #' alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 #' 
 #' @export
-signatureTypes <- list(alexandrov2 = "Alexandrov.2", alexandrov32 = "Alexandrov.32",
+signatureTypes <- list(alexandrov2 = "Alexandrov.2", 
+                       alexandrov32 = "Alexandrov.32",
                        shiraishi = "Shiraishi")
 
 getGenomeType <- function(signatureType){
