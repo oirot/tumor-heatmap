@@ -87,7 +87,8 @@ plotHeatmapAndDendogram <- function(exposures){
 #' refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
 #' transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
 #' TxDb.Hsapiens.UCSC.hg19.knownGene,
-#' verbose = FALSE)
+#' verbose = FALSE,
+#' plot = TRUE)
 #'
 #'
 #'
@@ -136,6 +137,9 @@ plotHeatmapAndDendogram <- function(exposures){
 #' @param verbose (Optional) Print information about reading and processing the
 #' mutation data. Default: TRUE
 #' 
+#' @param verbose (Optional) Output the heatmap of the computed exposures 
+#' vectors. Default: TRUE
+#' 
 #' @details
 #' Many of the parameters of this function are also described in the function
 #' `readGenomesFromMPF()` and `decomposeTumorGenomes()` from the package
@@ -183,7 +187,8 @@ tumorHeatmap <- function(mpfFilePath,
                          enforceUniqueTrDir = TRUE,
                          refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
                          transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
-                         verbose = FALSE) {
+                         verbose = FALSE,
+                         plot = TRUE) {
   
   signatures <- readSignaturesFromFileOrObject(signatures, signaturesType)
   genomes <- readGenome(mpfFilePath,
