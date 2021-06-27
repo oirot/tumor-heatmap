@@ -23,21 +23,27 @@ library(tumorHeatmap)
 ```
 
 # Introduction
-The R package *tumorHeatmap* has been developed for the _Scientific Programming_ project.
-The aim of the package is to decompose individual tumors by mutational signatures
-and display this decomposition as a heatmap. Furthermore, clustering is performed on
-the tumor genomes using their exposure vectors as features. All this is displayed in
-a single plot presenting the heatmap of the exposure vectors (each signature for each genome) and the deondgram resulting from the clustering. The source code can be found on 
+The R package *tumorHeatmap* has been developed for the 
+_Scientific Programming_ project. The aim of the package is to decompose 
+individual tumors by mutational signatures
+and display this decomposition as a heatmap. Furthermore, clustering is 
+performed on the tumor genomes using their exposure vectors as features. 
+All this is displayed in a single plot presenting the heatmap of the exposure
+vectors (each signature for each genome) and the deondgram resulting from the
+clustering. The source code can be found on 
 [Github](https://github.com/oirot/tumorHeatmap)
 
 # Installing and loading the package
 
 ## Installation
-To install the package devtools is needed. It can be installed in the following way 
+To install the package devtools is needed. 
+It can be installed in the following way 
 ```{r instDev, eval = FALSE}
 install.packages("devtools")
 ```
-Then the package _tumorHeatmap_ can be installed from Github or from the source package.
+Then the package _tumorHeatmap_ can be installed from Github or from the 
+source package.
+
 ### Installing from Github
 To install the package from Github the following code could be used.
 
@@ -59,7 +65,8 @@ The package needs to type of data:
   * mutational signatures in different formats
 
 ## Somatic mutation data
-The somatic mutation data needs to be in an Mutation Position Format (MPF). The MPF is as a tab separated format in which the information on the columns are:
+The somatic mutation data needs to be in an Mutation Position Format (MPF).
+The MPF is as a tab separated format in which the information on the columns are:
 
   * the name of the sample (or tumor ID);
   * the chromosome name;
@@ -81,22 +88,31 @@ For more information about this data format look [here](https://bioconductor.org
 ## Signatures
 Mutational signatures are a charachteristic combination of mutations that arise
 from a specific mutational process (eg. DNA duplication or DNA repair defects)
-More information about what a signature is can be found [here](https://cancer.sanger.ac.uk/signatures/)
+More information about what a signature is can be found 
+[here](https://cancer.sanger.ac.uk/signatures/)
 
-The signatures can be calculated using different models for the mutation and stored
-in different formats. The two used are _Shiraishi-type_ signatures and 
+The signatures can be calculated using different models for the mutation and
+stored in different formats. The two used are _Shiraishi-type_ signatures and 
 _Alexandrov-type_ signatures.
 
 ### Alexandrov-type signatures
 This type of mutational signature is described by _Ludmil B. Alexandrov et al._
 
-> In the first instance, we extracted mutational signatures using base substitutions and additionally included information on the sequence context of each mutation. Since there are six classes of base substitution C>A, C>G, C>T, T>A, T>C, T>G (all substitutions are referred to by the pyrimidine of the mutated Watson-Crick base pair) and since we incorporated information on the bases immediately 5′ and 3′ to each mutated base, there are 96 possible mutations in this classification. This 96 substitution classification is particularly useful for distinguishing mutational signatures which cause the same substitutions but in different sequence contexts
+> In the first instance, we extracted mutational signatures using base 
+substitutions and additionally included information on the sequence context of 
+each mutation. Since there are six classes of base substitution C>A, C>G, C>T, 
+T>A, T>C, T>G (all substitutions are referred to by the pyrimidine of the 
+mutated Watson-Crick base pair) and since we incorporated information on the 
+bases immediately 5′ and 3′ to each mutated base, there are 96 possible 
+mutations in this classification. This 96 substitution classification is
+particularly useful for distinguishing mutational signatures which cause 
+the same substitutions but in different sequence contexts
 
 _Alexandrov, L. B., Nik-Zainal, S., Wedge, D. C., Aparicio, S. A., Behjati, S., Biankin, A. V., Bignell, G. R., Bolli, N., Borg, A., Børresen-Dale, A. L., Boyault, S., Burkhardt, B., Butler, A. P., Caldas, C., Davies, H. R., Desmedt, C., Eils, R., Eyfjörd, J. E., Foekens, J. A., Greaves, M., … Stratton, M. R. (2013). Signatures of mutational processes in human cancer. Nature, 500(7463), 415–421. https://doi.org/10.1038/nature12477 _
 
 It considers the frequency of mutation of each one of the 96 possible substitution that
-are constitued by a nucleotide substitution and its flanking bases. The number of flanking
-basis can be higher but its computational cost its high.
+are constitued by a nucleotide substitution and its flanking bases. 
+The number of flanking basis can be higher but its computational cost its high.
 
 An example of such signatures can be found in the package `decompTumor2Sig`.
 
@@ -110,12 +126,20 @@ head(signatures[1])
 There are different format to save those kind of signatures, please use the
 `signatureTypes$alexandrov2` for Alexandrov V2 signatures and
 `signatureTypes$alexandrov32` for Alexandrov V3.2 signatures. A more detail 
-inquiry about the format can be found at the [COSMIC website](https://cancer.sanger.ac.uk/signatures/)
+inquiry about the format can be found at the
+[COSMIC website](https://cancer.sanger.ac.uk/signatures/)
 
 ### Shiraishi-type signatures
 The Shiraishi-type signature is described in the following way
 
->In brief, we first simplify the modelling of mutation signatures by decomposing them into separate “mutation features”. For example, the substitution type is one feature; flanking bases are each another feature. We then exploit this decomposition by using a probabilistic model for signatures that assumes independence across features. This approach substantially reduces the number of parameters associated with each signature, greatly facilitating the incorporation of additional relevant sequence context
+>In brief, we first simplify the modelling of mutation signatures by 
+decomposing them into separate “mutation features”. For example, the
+substitution type is one feature; flanking bases are each another feature. 
+We then exploit this decomposition by using a probabilistic model for 
+signatures that assumes independence across features. 
+This approach substantially reduces the number of parameters associated with
+each signature, greatly facilitating the incorporation of additional 
+relevant sequence context
 
 _Shiraishi Y, Tremmel G, Miyano S, Stephens M (2015) A Simple Model-Based Approach to Inferring and Visualizing Cancer Mutation Signatures. PLoS Genet 11(12): e1005657. https://doi.org/10.1371/journal.pgen.1005657 _
 
@@ -140,7 +164,9 @@ head(signatures[1])
 The workflow is quite simple and is based on a single function `tumorHeatmap`.
 A simple example of usage with the Shiraishi-type signatures provided by the 
 package `decompTumor2Sig` and the tumoral genomes provided by the same package.
-The tumoral genomes are from breast cancer genomes from Nik-Zainal et al (PMID: 22608084). For more information about the data used check out the vignette of `decompTumor2Sig`
+The tumoral genomes are from breast cancer genomes from Nik-Zainal et al
+(PMID: 22608084). For more information about the data used check
+out the vignette of `decompTumor2Sig`
 
 ```{r simpleEx, fig.dim = c(6, 6)}
   #read breast cancer genomes from Nik-Zainal et al (PMID: 22608084) 
@@ -158,7 +184,8 @@ The tumoral genomes are from breast cancer genomes from Nik-Zainal et al (PMID: 
                             signaturesType = signatureTypes$shiraishi)
 ```
 
-A more advanced example using Alexandrov-type V3.2 signatures and the same genomes is as follow. The signature are provided by COSMIC and can 
+A more advanced example using Alexandrov-type V3.2 signatures and the same
+genomes is as follow. The signature are provided by COSMIC and can 
 be found at [this link](https://cancer.sanger.ac.uk/signatures/sbs/). They are
 also provided with this package.
 The paramters `numBases` and `trDir` are used to match the signature type
@@ -179,8 +206,9 @@ that uses 3 bases and has no information about the directionality of the strand.
                             trDir = FALSE)
 ```
 
-You could also pass a compatible signature object as described in the vignette of
-the package `decompTumor2Sig` instead of a path to the file.
+You could also pass a compatible signature object as described in the vignette
+of the package `decompTumor2Sig` instead of a path to the file.
 
 If you do not want to use the human hg19 assembly as a refernce genome and the 
-UCSC.hg19.knownGene annotation you can change them using the parameters `refGenome` and `transcriptAnno`, respectively.
+UCSC.hg19.knownGene annotation you can change them using the parameters 
+`refGenome` and `transcriptAnno`, respectively.
