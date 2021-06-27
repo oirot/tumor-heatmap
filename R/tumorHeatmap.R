@@ -57,8 +57,6 @@ computeExposures <- function(genomes, signatures, verbose){
 
 
 plotHeatmapAndDendogram <- function(exposures){
-  dev.new()
-  
   heatmap(
     exposures,
     Colv = NA,
@@ -66,7 +64,9 @@ plotHeatmapAndDendogram <- function(exposures){
     revC = TRUE,
     main = "Heatmap of the exposure vectors",
     xlab = "Signature",
-    ylab = "Sample"
+    ylab = "Sample",
+    cexRow = 0.8,
+    cexCol = 0.8
   )
 }
 
