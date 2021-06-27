@@ -4,6 +4,9 @@
 #' Use alexandrov2 for Alexandrov V2 signatures,
 #' alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 #'
+#' @examples 
+#'signatureTypes
+#'signatureTypes$shiraishi
 #' @export
 signatureTypes <- list(alexandrov2 = "Alexandrov.2",
                        alexandrov32 = "Alexandrov.32",

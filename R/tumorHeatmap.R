@@ -157,19 +157,19 @@ plotHeatmapAndDendogram <- function(exposures) {
 #' @return The exposure vector is returned and a heatmap of their similarity is
 #' plotted
 #'
-#' @example
-#' #read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
-#' gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
-#'                     package="decompTumor2Sig")
+#' @examples
+#'#read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
+#'gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
+#'                   package="decompTumor2Sig")
 #'
-#' # get the filenames with the shiraishi signatures
-#' sigfiles <- system.file("extdata",
-#'                         paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
-#'                                1:4,".tsv"),
-#'                         package="decompTumor2Sig")
-#' # compute the exposure vectors and plot the heatmap
-#' exposures <- tumorHeatmap(gfile, sigfiles,
-#'                           signaturesType = signatureTypes$shiraishi)
+#'# get the filenames with the shiraishi signatures
+#'sigfiles <- system.file("extdata",
+#'                       paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
+#'                              1:4,".tsv"),
+#'                       package="decompTumor2Sig")
+#'# compute the exposure vectors and plot the heatmap
+#'exposures <- tumorHeatmap(gfile, sigfiles,
+#'                         signaturesType = signatureTypes$shiraishi)
 #'
 #'
 #' @importFrom decompTumor2Sig isSignatureSet
