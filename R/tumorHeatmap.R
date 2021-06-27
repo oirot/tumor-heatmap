@@ -186,8 +186,10 @@ tumorHeatmap <- function(mpfFilePath,
                          numBases = 5,
                          trDir = TRUE,
                          enforceUniqueTrDir = TRUE,
-                         refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
-                         transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene,
+                         refGenome = BSgenome.Hsapiens.UCSC.hg19::
+                           BSgenome.Hsapiens.UCSC.hg19,
+                         transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
+                           TxDb.Hsapiens.UCSC.hg19.knownGene,
                          verbose = FALSE,
                          plot = TRUE) {
   signatures <-
