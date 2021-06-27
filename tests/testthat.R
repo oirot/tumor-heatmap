@@ -1,2 +1,2 @@
- library("testthat")
- test_that("tumorHeatmap")
+library("testthat")
+test_that("tumorHeatmap")
