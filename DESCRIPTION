@@ -3,7 +3,7 @@ Title: Visual comparison of mutational processes in a set of tumors
 Version: 0.99.0
 Date: 2021-06-04
 Authors@R: c(
-    person("Vittorio", "Aiello", email = "vittorio.aiello@mail.polimi.com",
+    person("Vittorio", "Aiello", email = "vittorio.aiello@mail.polimi.it",
     role = c("aut", "cre")))
 Description: Allows to compute the exposure vectors from an MPF file and to plot an heatmap, clustering the different tumor genomes by their similarities in the exposure vectors. The exposure vectors can be calculated using different signature types (Shiraishi, Alexandrov V2 and Alexandrov V3.2). Based on the package decompTumor2Sig.
 biocViews: BiologicalQuestion, BiomedicalInformatics, DNASeq, Genetics, GenomicVariation, SNP, Sequencing, Software, SomaticMutation, StatisticalMethod, Clustering
