@@ -91,5 +91,6 @@
 #' @keywords datasets csv signatures COSMIC SBS
 #' @name COSMIC_v3.2_SBS_GRCh37
 #' @usage COSMIC_v3.2_SBS_GRCh37
+#' @example sigfile <- system.file("extdata", "COSMIC_v3.2_SBS_GRCh37.txt", package="tumorHeatmap")
 #' @source \url{https://cancer.sanger.ac.uk/signatures/downloads/}
 "COSMIC_v3.2_SBS_GRCh37"
