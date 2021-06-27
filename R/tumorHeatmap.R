@@ -138,7 +138,7 @@ plotHeatmapAndDendogram <- function(exposures) {
 #' @param verbose (Optional) Print information about reading and processing the
 #' mutation data. Default: TRUE
 #'
-#' @param verbose (Optional) Output the heatmap of the computed exposures
+#' @param plot (Optional) Output the heatmap of the computed exposures
 #' vectors. Default: TRUE
 #'
 #' @details
