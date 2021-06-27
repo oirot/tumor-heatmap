@@ -142,7 +142,7 @@ A simple example of usage with the Shiraishi-type signatures provided by the
 package `decompTumor2Sig` and the tumoral genomes provided by the same package.
 The tumoral genomes are from breast cancer genomes from Nik-Zainal et al (PMID: 22608084). For more information about the data used check out the vignette of `decompTumor2Sig`
 
-```{r simpleEx}
+```{r simpleEx, fig.dim = c(6, 6)}
   #read breast cancer genomes from Nik-Zainal et al (PMID: 22608084) 
   gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz", 
                        package="decompTumor2Sig")
@@ -152,15 +152,10 @@ The tumoral genomes are from breast cancer genomes from Nik-Zainal et al (PMID: 
                           paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
                                  1:4,".tsv"),
                           package="decompTumor2Sig")
-  
-  #setting the correct margins for the figure to draw
-  oldParValues <- par(mar=c(1,1,1,1))  
+
   # compute the exposure vectors and plot the heatmap
   exposures <- tumorHeatmap(gfile, sigfiles, 
                             signaturesType = signatureTypes$shiraishi)
-  #resetting the margin
-  par(oldParValues)  
-
 ```
 
 A more advanced example using Alexandrov-type V3.2 signatures and the same genomes is as follow. The signature are provided by COSMIC and can 
@@ -169,7 +164,7 @@ also provided with this package.
 The paramters `numBases` and `trDir` are used to match the signature type
 that uses 3 bases and has no information about the directionality of the strand.
 
-```{r adv1}
+```{r adv1, fig.dim = c(6, 6)}
   #read breast cancer genomes from Nik-Zainal et al (PMID: 22608084) 
   gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz", 
                        package="decompTumor2Sig")
@@ -177,17 +172,15 @@ that uses 3 bases and has no information about the directionality of the strand.
   sigfile <- system.file("extdata", "COSMIC_v3.2_SBS_GRCh37.txt", 
                        package="tumorHeatmap")
   
-  #setting the correct margins for the figure to draw
-  oldParValues <- par(mar=c(1,1,1,1))  
+  # compute the exposure vectors and plot the heatmap
   exposures <- tumorHeatmap(gfile, sigfile, 
                             signaturesType = signatureTypes$alexandrov32,
                             numBases = 3,
                             trDir = FALSE)
-  #resetting the margin
-  par(oldParValues)  
 ```
+
 You could also pass a compatible signature object as described in the vignette of
 the package `decompTumor2Sig` instead of a path to the file.
 
 If you do not want to use the human hg19 assembly as a refernce genome and the 
-UCSC.hg19.knownGene annotation you can change them using the parameters `refGenome`  `transcriptAnno`, respectively.
+UCSC.hg19.knownGene annotation you can change them using the parameters `refGenome` and `transcriptAnno`, respectively.
