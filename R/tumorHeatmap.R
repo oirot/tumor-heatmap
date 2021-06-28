@@ -34,7 +34,7 @@
         mpfFilePath,
         numBases=numBases,
         type=.getGenomeType(signaturesType),
-        trDi=trDir,
+        trDir=trDir,
         refGenome=refGenome,
         transcriptAnno=transcriptAnno,
         verbose=verbose
