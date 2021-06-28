@@ -6,15 +6,15 @@
 \usage{
 tumorHeatmap(mpfFilePath,
 signatures,
-signaturesType = signatureTypes$alexandrov32,
-numBases = 5,
-trDir = TRUE,
-enforceUniqueTrDir = TRUE,
-refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
-transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
+signaturesType=signatureTypes$alexandrov32,
+numBases=5,
+trDir=TRUE,
+enforceUniqueTrDir=TRUE,
+refGenome=BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
+transcriptAnno=TxDb.Hsapiens.UCSC.hg19.knownGene::
 TxDb.Hsapiens.UCSC.hg19.knownGene,
-verbose = FALSE,
-plot = TRUE)
+verbose=FALSE,
+plot=TRUE)
 }
 \arguments{
 \item{mpfFilePath}{(Mandatory) The path of the MPF file from
@@ -79,18 +79,18 @@ functions. A more throughout explanation of the parameters and the functions
 can be found in their documentation, liked in the see also section.
 }
 \examples{
-#read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
+##read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
 gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
                   package="decompTumor2Sig")
 
-# get the filenames with the shiraishi signatures
+##get the filenames with the shiraishi signatures
 sigfiles <- system.file("extdata",
                       paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
                              1:4,".tsv"),
                       package="decompTumor2Sig")
-# compute the exposure vectors and plot the heatmap
+##compute the exposure vectors and plot the heatmap
 exposures <- tumorHeatmap(gfile, sigfiles,
-                        signaturesType = signatureTypes$shiraishi)
+                        signaturesType=signatureTypes$shiraishi)
 
 
 }
