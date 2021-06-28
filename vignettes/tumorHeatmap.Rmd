@@ -13,8 +13,8 @@ author:
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse=TRUE,
+  comment="#>"
 )
 ```
 
@@ -181,7 +181,7 @@ out the vignette of `decompTumor2Sig`
 
   # compute the exposure vectors and plot the heatmap
   exposures <- tumorHeatmap(gfile, sigfiles, 
-                            signaturesType = signatureTypes$shiraishi)
+                            signaturesType=signatureTypes$shiraishi)
 ```
 
 A more advanced example using Alexandrov-type V3.2 signatures and the same
@@ -201,9 +201,9 @@ that uses 3 bases and has no information about the directionality of the strand.
   
   # compute the exposure vectors and plot the heatmap
   exposures <- tumorHeatmap(gfile, sigfile, 
-                            signaturesType = signatureTypes$alexandrov32,
-                            numBases = 3,
-                            trDir = FALSE)
+                            signaturesType=signatureTypes$alexandrov32,
+                            numBases=3,
+                            trDir=FALSE)
 ```
 
 You could also pass a compatible signature object as described in the vignette

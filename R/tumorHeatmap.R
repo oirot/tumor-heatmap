@@ -5,8 +5,8 @@
             ## if the signatures are a string treat them as a path to
             ## the actual signatures
             signatures <- .readSignatures(
-                signaturePath = signatures,
-                type = signaturesType
+                signaturePath=signatures,
+                type=signaturesType
             )
         }
         ## otherwise assume that the signature are in the object itself
@@ -32,12 +32,12 @@
     ## read the tumor genomes
     genomes <- readGenomesFromMPF(
         mpfFilePath,
-        numBases = numBases,
-        type = .getGenomeType(signaturesType),
-        trDir = trDir,
-        refGenome = refGenome,
-        transcriptAnno = transcriptAnno,
-        verbose = verbose
+        numBases=numBases,
+        type=.getGenomeType(signaturesType),
+        trDi=trDir,
+        refGenome=refGenome,
+        transcriptAnno=transcriptAnno,
+        verbose=verbose
     )
     if (verbose) {
           message("DONE")
@@ -53,7 +53,7 @@
           message("Estimating exposure vecotrs...")
       }
     exposure <-
-        decomposeTumorGenomes(genomes = genomes, signatures = signatures)
+        decomposeTumorGenomes(genomes=genomes, signatures=signatures)
     exposure <- t(do.call(cbind, exposure))
     if (verbose) {
           message("DONE")
@@ -66,14 +66,14 @@
 .plotHeatmapAndDendogram <- function(exposures) {
     heatmap(
         exposures,
-        Colv = NA,
-        scale = "row",
-        revC = TRUE,
-        main = "Heatmap of the exposure vectors",
-        xlab = "Signature",
-        ylab = "Sample",
-        cexRow = 0.8,
-        cexCol = 0.8
+        Colv=NA,
+        scale="row",
+        revC=TRUE,
+        main="Heatmap of the exposure vectors",
+        xlab="Signature",
+        ylab="Sample",
+        cexRow=0.8,
+        cexCol=0.8
     )
 }
 
@@ -166,7 +166,7 @@
 #' @examples
 #' ## read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
 #' gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
-#'     package = "decompTumor2Sig"
+#'     package="decompTumor2Sig"
 #' )
 #'
 #' ## get the filenames with the shiraishi signatures
@@ -175,11 +175,11 @@
 #'         "Nik-Zainal_PMID_22608084-pmsignature-sig",
 #'         1:4, ".tsv"
 #'     ),
-#'     package = "decompTumor2Sig"
+#'     package="decompTumor2Sig"
 #' )
 #' ## compute the exposure vectors and plot the heatmap
 #' exposures <- tumorHeatmap(gfile, sigfiles,
-#'     signaturesType = signatureTypes$shiraishi
+#'     signaturesType=signatureTypes$shiraishi
 #' )
 #' @importFrom decompTumor2Sig isSignatureSet
 #' @importFrom decompTumor2Sig readGenomesFromMPF
@@ -191,16 +191,16 @@
 #' @export
 tumorHeatmap <- function(mpfFilePath,
                          signatures,
-                         signaturesType = signatureTypes$alexandrov32,
-                         numBases = 5,
-                         trDir = TRUE,
-                         enforceUniqueTrDir = TRUE,
-                         refGenome = BSgenome.Hsapiens.UCSC.hg19::
+                         signaturesType=signatureTypes$alexandrov32,
+                         numBases=5,
+                         trDir=TRUE,
+                         enforceUniqueTrDir=TRUE,
+                         refGenome=BSgenome.Hsapiens.UCSC.hg19::
                          BSgenome.Hsapiens.UCSC.hg19,
-                         transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
+                         transcriptAnno=TxDb.Hsapiens.UCSC.hg19.knownGene::
                          TxDb.Hsapiens.UCSC.hg19.knownGene,
-                         verbose = FALSE,
-                         plot = TRUE) {
+                         verbose=FALSE,
+                         plot=TRUE) {
     signatures <-
         .readSignaturesFromFileOrObject(signatures, signaturesType)
     genomes <- .readGenome(

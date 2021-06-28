@@ -9,14 +9,14 @@
 #' signatureTypes$shiraishi
 #' @export
 signatureTypes <- list(
-    alexandrov2 = "Alexandrov.2",
-    alexandrov32 = "Alexandrov.32",
-    shiraishi = "Shiraishi"
+    alexandrov2="Alexandrov.2",
+    alexandrov32="Alexandrov.32",
+    shiraishi="Shiraishi"
 )
 
 
 .getGenomeType <- function(signatureType) {
-    return(strsplit(signatureType, ".", fixed = TRUE)[[1]][1])
+    return(strsplit(signatureType, ".", fixed=TRUE)[[1]][1])
 }
 
 
@@ -25,9 +25,9 @@ signatureTypes <- list(
     signatures <-
         as.matrix(read.table(
             filenames,
-            sep = "\t",
-            header = TRUE,
-            row.names = 1
+            sep="\t",
+            header=TRUE,
+            row.names=1
         ))
     ## get the names of the mutations and add them as names for the list
     ## splitting each column into diffrent list elements that represent a signature
