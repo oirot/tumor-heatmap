@@ -4,46 +4,47 @@
 \alias{tumorHeatmap}
 \title{Heatmap of exposure vectors from tumor genomes}
 \usage{
-tumorHeatmap(mpfFilePath, 
+tumorHeatmap(mpfFilePath,
 signatures,
 signaturesType = signatureTypes$alexandrov32,
 numBases = 5,
-trDir = TRUE, 
+trDir = TRUE,
 enforceUniqueTrDir = TRUE,
 refGenome = BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19,
 transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
 TxDb.Hsapiens.UCSC.hg19.knownGene,
-verbose = FALSE)
+verbose = FALSE,
+plot = TRUE)
 }
 \arguments{
 \item{mpfFilePath}{(Mandatory) The path of the MPF file from
 which to load the tumor genomes}
 
-\item{signatures}{(Mandatory) Either a path to the signature 
+\item{signatures}{(Mandatory) Either a path to the signature
 file or a vector
-can be dircetly an object containing the signatures. The object can be a 
-list of vectors, data frames or matrices. Vectors are 
-used for Alexandrov 
+can be dircetly an object containing the signatures. The object can be a
+list of vectors, data frames or matrices. Vectors are
+used for Alexandrov
 signatures, data frames or matrices for Shiraishi signatures.}
 
 \item{signaturesType}{(Optional) A string representing the signature type.
 A list of the allowd signature types is available as the object
- `signatureTypes`. Use alexandrov2 for Alexandrov V2 signatures, 
+ `signatureTypes`. Use alexandrov2 for Alexandrov V2 signatures,
 alandrov32 for Alexandrov V3.2 ones and shiraishi for Shiraishi signatures.
 DEFAULT: signatureTypes$alexandrov32}
 
 \item{numBases}{(Optional) Total number of bases (mutated base and flanking
 bases) to be used for sequence patterns. Must be odd. Default: 5}
 
-\item{trDir}{(Mandatory) Specifies whether the transcription direction is 
+\item{trDir}{(Mandatory) Specifies whether the transcription direction is
 taken into account in the signature model. If so, only mutations within
-genomic regions with a defined transcription direction can be 
+genomic regions with a defined transcription direction can be
 considered. Default: TRUE}
 
 \item{enforceUniqueTrDir}{(Optional) Used only if trDir is TRUE. If
 enforceUniqueTrDir is TRUE (default), then mutations which map to a region
 with multiple overlapping genes with opposing transcription directions will
-be excluded from the analysis. If FALSE, the transcript direction 
+be excluded from the analysis. If FALSE, the transcript direction
 encountered first in the transcript database (see transcriptAnno) is
 assigned to the mutation.}
 
@@ -51,19 +52,22 @@ assigned to the mutation.}
 needed to extract sequence patterns. Default: BSgenome object for hg19.}
 
 \item{transcriptAnno}{(Optional) Transcript annotation (TxDb object) used to
-determine the transcription direction. This is required only if trDir is 
+determine the transcription direction. This is required only if trDir is
 TRUE. Default: TxDb object for hg19.}
 
 \item{verbose}{(Optional) Print information about reading and processing the
 mutation data. Default: TRUE}
+
+\item{plot}{(Optional) Output the heatmap of the computed exposures
+vectors. Default: TRUE}
 }
 \value{
 The exposure vector is returned and a heatmap of their similarity is
 plotted
 }
 \description{
-`tumorHeatmap` function computes the exposure vectors from an MPF file and 
-plots an heatmap, clustering the different tumor genomes by their 
+`tumorHeatmap` function computes the exposure vectors from an MPF file and
+plots an heatmap, clustering the different tumor genomes by their
 similarities in the exposure vectors.
 }
 \details{
@@ -71,11 +75,27 @@ Many of the parameters of this function are also described in the function
 `readGenomesFromMPF()` and `decomposeTumorGenomes()` from the package
 `decompTumor2Sig` as those functions and package are at the
 base of this function and many parameteres are passed directly to those
-functions. A more throughout explanation of the parameters and the functions 
+functions. A more throughout explanation of the parameters and the functions
 can be found in their documentation, liked in the see also section.
 }
+\examples{
+#read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
+gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
+                  package="decompTumor2Sig")
+
+# get the filenames with the shiraishi signatures
+sigfiles <- system.file("extdata",
+                      paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
+                             1:4,".tsv"),
+                      package="decompTumor2Sig")
+# compute the exposure vectors and plot the heatmap
+exposures <- tumorHeatmap(gfile, sigfiles,
+                        signaturesType = signatureTypes$shiraishi)
+
+
+}
 \seealso{
-[decompTumor2Sig] 
+[decompTumor2Sig]
 The links to the documentation of the mentioned functions from the package
 `decompTumor2Sig`
 \link[decompTumor2Sig]{readGenomesFromMPF}
