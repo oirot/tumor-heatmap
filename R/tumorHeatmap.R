@@ -27,8 +27,8 @@
                         transcriptAnno,
                         verbose) {
     if (verbose) {
-          message("Loading genomes... ")
-      }
+        message("Loading genomes... ")
+    }
     ## read the tumor genomes
     genomes <- readGenomesFromMPF(
         mpfFilePath,
@@ -40,8 +40,8 @@
         verbose=verbose
     )
     if (verbose) {
-          message("DONE")
-      }
+        message("DONE")
+    }
 
     return(genomes)
 }
@@ -50,14 +50,14 @@
 ## compute the exposure vectors
 .computeExposures <- function(genomes, signatures, verbose) {
     if (verbose) {
-          message("Estimating exposure vecotrs...")
-      }
+        message("Estimating exposure vecotrs...")
+    }
     exposure <-
         decomposeTumorGenomes(genomes=genomes, signatures=signatures)
     exposure <- t(do.call(cbind, exposure))
     if (verbose) {
-          message("DONE")
-      }
+        message("DONE")
+    }
 
     return(exposure)
 }
