@@ -1,74 +1,80 @@
-##read the signature from a file or if its a proper signature obj do nothing
+## read the signature from a file or if its a proper signature obj do nothing
 .readSignaturesFromFileOrObject <-
-  function(signatures, signaturesType) {
-    if (is(signatures, "character")) {
-      ##if the signatures are a string treat them as a path to
-      ##the actual signatures
-      signatures <- .readSignatures(signaturePath=signatures,
-                                   type=signaturesType)
+    function(signatures, signaturesType) {
+        if (is(signatures, "character")) {
+            ## if the signatures are a string treat them as a path to
+            ## the actual signatures
+            signatures <- .readSignatures(
+                signaturePath = signatures,
+                type = signaturesType
+            )
+        }
+        ## otherwise assume that the signature are in the object itself
+        if (!isSignatureSet(signatures)) {
+            stop("Invalid signatures")
+        }
+
+        return(signatures)
     }
-    ##otherwise assume that the signature are in the object itself
-    if (!isSignatureSet(signatures)) {
-      stop("Invalid signatures")
-    }
-    
-    return(signatures)
-  }
 
 
-##read the genome from the MPF file
+## read the genome from the MPF file
 .readGenome <- function(mpfFilePath,
-                       numBases,
-                       signaturesType,
-                       trDir,
-                       refGenome,
-                       transcriptAnno,
-                       verbose) {
-  if (verbose)
-    message("Loading genomes... ")
-  ##read the tumor genomes
-  genomes <- readGenomesFromMPF(
-    mpfFilePath,
-    numBases=numBases,
-    type=.getGenomeType(signaturesType),
-    trDir=trDir,
-    refGenome=refGenome,
-    transcriptAnno=transcriptAnno,
-    verbose=verbose
-  )
-  if (verbose)
-    message("DONE")
-  
-  return(genomes)
+                        numBases,
+                        signaturesType,
+                        trDir,
+                        refGenome,
+                        transcriptAnno,
+                        verbose) {
+    if (verbose) {
+          message("Loading genomes... ")
+      }
+    ## read the tumor genomes
+    genomes <- readGenomesFromMPF(
+        mpfFilePath,
+        numBases = numBases,
+        type = .getGenomeType(signaturesType),
+        trDir = trDir,
+        refGenome = refGenome,
+        transcriptAnno = transcriptAnno,
+        verbose = verbose
+    )
+    if (verbose) {
+          message("DONE")
+      }
+
+    return(genomes)
 }
 
 
-##compute the exposure vectors
+## compute the exposure vectors
 .computeExposures <- function(genomes, signatures, verbose) {
-  if (verbose)
-    message("Estimating exposure vecotrs...")
-  exposure <-
-    decomposeTumorGenomes(genomes=genomes, signatures=signatures)
-  exposure <- t(do.call(cbind, exposure))
-  if (verbose)
-    message("DONE")
-  
-  return(exposure)
+    if (verbose) {
+          message("Estimating exposure vecotrs...")
+      }
+    exposure <-
+        decomposeTumorGenomes(genomes = genomes, signatures = signatures)
+    exposure <- t(do.call(cbind, exposure))
+    if (verbose) {
+          message("DONE")
+      }
+
+    return(exposure)
 }
 
 
 .plotHeatmapAndDendogram <- function(exposures) {
-  heatmap(
-    exposures,
-    Colv=NA,
-    scale="row",
-    revC=TRUE,
-    main="Heatmap of the exposure vectors",
-    xlab="Signature",
-    ylab="Sample",
-    cexRow=0.8,
-    cexCol=0.8
-  )
+    heatmap(
+        exposures,
+        Colv = NA,
+        scale = "row",
+        revC = TRUE,
+        main = "Heatmap of the exposure vectors",
+        xlab = "Signature",
+        ylab = "Sample",
+        cexRow = 0.8,
+        cexCol = 0.8
+    )
 }
 
 
@@ -98,7 +104,7 @@
 #'
 #' @param signatures (Mandatory) Either a path to the signature
 #' file or a vector
-#` of path to signatures file (in the case of Shiraishi signatures). Also, it
+# ` of path to signatures file (in the case of Shiraishi signatures). Also, it
 #' can be dircetly an object containing the signatures. The object can be a
 #' list of vectors, data frames or matrices. Vectors are
 #' used for Alexandrov
@@ -158,20 +164,23 @@
 #' plotted
 #'
 #' @examples
-#'##read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
-#'gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
-#'                   package="decompTumor2Sig")
+#' ## read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
+#' gfile <- system.file("extdata", "Nik-Zainal_PMID_22608084-MPF.txt.gz",
+#'     package = "decompTumor2Sig"
+#' )
 #'
-#'##get the filenames with the shiraishi signatures
-#'sigfiles <- system.file("extdata",
-#'                       paste0("Nik-Zainal_PMID_22608084-pmsignature-sig",
-#'                              1:4,".tsv"),
-#'                       package="decompTumor2Sig")
-#'##compute the exposure vectors and plot the heatmap
-#'exposures <- tumorHeatmap(gfile, sigfiles,
-#'                         signaturesType=signatureTypes$shiraishi)
-#'
-#'
+#' ## get the filenames with the shiraishi signatures
+#' sigfiles <- system.file("extdata",
+#'     paste0(
+#'         "Nik-Zainal_PMID_22608084-pmsignature-sig",
+#'         1:4, ".tsv"
+#'     ),
+#'     package = "decompTumor2Sig"
+#' )
+#' ## compute the exposure vectors and plot the heatmap
+#' exposures <- tumorHeatmap(gfile, sigfiles,
+#'     signaturesType = signatureTypes$shiraishi
+#' )
 #' @importFrom decompTumor2Sig isSignatureSet
 #' @importFrom decompTumor2Sig readGenomesFromMPF
 #' @importFrom decompTumor2Sig decomposeTumorGenomes
@@ -182,38 +191,40 @@
 #' @export
 tumorHeatmap <- function(mpfFilePath,
                          signatures,
-                         signaturesType=signatureTypes$alexandrov32,
-                         numBases=5,
-                         trDir=TRUE,
-                         enforceUniqueTrDir=TRUE,
-                         refGenome=BSgenome.Hsapiens.UCSC.hg19::
-                           BSgenome.Hsapiens.UCSC.hg19,
-                         transcriptAnno=TxDb.Hsapiens.UCSC.hg19.knownGene::
-                           TxDb.Hsapiens.UCSC.hg19.knownGene,
-                         verbose=FALSE,
-                         plot=TRUE) {
-  signatures <-
-    .readSignaturesFromFileOrObject(signatures, signaturesType)
-  genomes <- .readGenome(mpfFilePath,
-                        numBases,
-                        signaturesType,
-                        trDir,
-                        refGenome,
-                        transcriptAnno,
-                        verbose)
-  ##check that the genome and the signatures are compatible
-  if (!sameSignatureFormat(signatures, genomes)) {
-    stop(
-      paste0(
-        "The parameter used to load the genomes need to be the same",
-        " as the ones used to generate the signatures. Please verify",
-        " that this is the case"
-      )
+                         signaturesType = signatureTypes$alexandrov32,
+                         numBases = 5,
+                         trDir = TRUE,
+                         enforceUniqueTrDir = TRUE,
+                         refGenome = BSgenome.Hsapiens.UCSC.hg19::
+                         BSgenome.Hsapiens.UCSC.hg19,
+                         transcriptAnno = TxDb.Hsapiens.UCSC.hg19.knownGene::
+                         TxDb.Hsapiens.UCSC.hg19.knownGene,
+                         verbose = FALSE,
+                         plot = TRUE) {
+    signatures <-
+        .readSignaturesFromFileOrObject(signatures, signaturesType)
+    genomes <- .readGenome(
+        mpfFilePath,
+        numBases,
+        signaturesType,
+        trDir,
+        refGenome,
+        transcriptAnno,
+        verbose
     )
-  }
-  
-  exposures <- .computeExposures(genomes, signatures, verbose)
-  .plotHeatmapAndDendogram(exposures)
-  
-  return(exposures)
+    ## check that the genome and the signatures are compatible
+    if (!sameSignatureFormat(signatures, genomes)) {
+        stop(
+            paste0(
+                "The parameter used to load the genomes need to be the same",
+                " as the ones used to generate the signatures. Please verify",
+                " that this is the case"
+            )
+        )
+    }
+
+    exposures <- .computeExposures(genomes, signatures, verbose)
+    .plotHeatmapAndDendogram(exposures)
+
+    return(exposures)
 }
