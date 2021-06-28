@@ -8,6 +8,7 @@ Authors@R: c(
 Description: Allows to compute the exposure vectors from an MPF file and to plot an heatmap, clustering the different tumor genomes by their similarities in the exposure vectors. The exposure vectors can be calculated using different signature types (Shiraishi, Alexandrov V2 and Alexandrov V3.2). Based on the package decompTumor2Sig.
 biocViews: BiologicalQuestion, BiomedicalInformatics, DNASeq, Genetics, GenomicVariation, SNP, Sequencing, Software, SomaticMutation, StatisticalMethod, Clustering
 License: CC0
+Encoding: UTF-8
 RoxygenNote: 7.1.1
 Imports: 
     decompTumor2Sig,
