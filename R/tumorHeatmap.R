@@ -160,8 +160,8 @@
 #' \link[decompTumor2Sig]{readGenomesFromMPF}
 #' \link[decompTumor2Sig]{decomposeTumorGenomes}
 #'
-#' @return The exposure vector is returned and a heatmap of their similarity is
-#' plotted
+#' @return The exposure vector is returned where row are the samples and the
+#' columns represent the different signature used
 #'
 #' @examples
 #' ## read breast cancer genomes from Nik-Zainal et al (PMID: 22608084)
