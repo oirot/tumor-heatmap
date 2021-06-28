@@ -62,8 +62,8 @@ mutation data. Default: TRUE}
 vectors. Default: TRUE}
 }
 \value{
-The exposure vector is returned and a heatmap of their similarity is
-plotted
+The exposure vector is returned where row are the samples and the
+columns represent the different signature used
 }
 \description{
 `tumorHeatmap` function computes the exposure vectors from an MPF file and
